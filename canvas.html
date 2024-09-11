@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML Canvas Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f3f3f3;
+        }
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="400" height="400"></canvas>
+    <script>
+        var canvas = document.getElementById('myCanvas');
+        var context = canvas.getContext('2d');
+
+        // Draw a rectangle
+        context.fillStyle = '#FF0000';
+        context.fillRect(50, 50, 150, 100);
+
+        // Draw a circle
+        context.beginPath();
+        context.arc(200, 200, 50, 0, 2 * Math.PI);
+        context.fillStyle = '#00FF00';
+        context.fill();
+
+        // Draw text
+        context.font = '20px Arial';
+        context.fillStyle = '#0000FF';
+        context.fillText('Hello Canvas', 100, 300);
+    </script>
+</body>
+</html>

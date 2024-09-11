@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML5 APIs Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+        canvas {
+            border: 1px solid #000;
+            margin-bottom: 20px;
+        }
+        .container {
+            width: 80%;
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML5 APIs Example</h1>
+
+    <!-- Canvas API -->
+    <div class="container">
+        <h2>Canvas API</h2>
+        <canvas id="myCanvas" width="400" height="200"></canvas>
+    </div>
+
+    <!-- Web Storage API -->
+    <div class="container">
+        <h2>Web Storage API</h2>
+        <button onclick="storeData()">Store Data</button>
+        <button onclick="retrieveData()">Retrieve Data</button>
+        <p id="storageOutput"></p>
+    </div>
+
+    <!-- Geolocation API -->
+    <div class="container">
+        <h2>Geolocation API</h2>
+        <button onclick="getLocation()">Get Location</button>
+        <p id="locationOutput"></p>
+    </div>
+
+    <!-- Web Workers API -->
+    <div class="container">
+        <h2>Web Workers API</h2>
+        <button onclick="startWorker()">Start Worker</button>
+        <button onclick="stopWorker()">Stop Worker</button>
+        <p id="workerOutput"></p>
+    </div>
+
+    <!-- Web Sockets API -->
+    <div class="container">
+        <h2>Web Sockets API</h2>
+        <button onclick="connectWebSocket()">Connect WebSocket</button>
+        <p id="webSocketOutput"></p>
+    </div>
+
+    <script>
+        // Canvas API
+        var canvas = document.getElementById('myCanvas');
+        var context = canvas.getContext('2d');
+        context.fillStyle = '#FF0000';
+        context.fillRect(10, 10, 150, 100);
+
+        // Web Storage API
+        function storeData() {
+            localStorage.setItem('name', 'John Doe');
+            alert('Data Stored');
+        }
+
+        function retrieveData() {
+            var name = localStorage.getItem('name');
+            document.getElementById('storageOutput').innerText = name ? 'Stored Name: ' + name : 'No data found';
+        }
+
+        // Geolocation API
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                document.getElementById('locationOutput').innerText = 'Geolocation is not supported by this browser.';
+            }
+        }
+
+        function showPosition(position) {
+            document.getElementById('locationOutput').innerText = 'Latitude: ' + position.coords.latitude + 
+            ', Longitude: ' + position.coords.longitude;
+        }
+
+        // Web Workers API
+        var worker;
+        function startWorker() {
+            if (typeof(Worker) !== 'undefined') {
+                if (typeof(worker) == 'undefined') {
+                    worker = new Worker('worker.js');
+                }
+                worker.onmessage = function(event) {
+                    document.getElementById('workerOutput').innerText = event.data;
+                };
+            } else {
+                document.getElementById('workerOutput').innerText = 'Web Workers are not supported by this browser.';
+            }
+        }
+
+        function stopWorker() {
+            worker.terminate();
+            worker = undefined;
+        }
+
+        // Web Sockets API
+        var webSocket;
+        function connectWebSocket() {
+            webSocket = new WebSocket('wss://echo.websocket.org');
+            webSocket.onopen = function() {
+                webSocket.send('Hello WebSocket');
+            };
+            webSocket.onmessage = function(event) {
+                document.getElementById('webSocketOutput').innerText = 'Message from server: ' + event.data;
+            };
+        }
+    </script>
+</body>
+</html>

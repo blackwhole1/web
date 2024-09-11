@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Element with Shadow DOM</title>
+    <style>
+        custom-card {
+            display: block;
+            width: 300px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <custom-card></custom-card>
+
+    <script>
+        class CustomCard extends HTMLElement {
+            constructor() {
+                super();
+                const shadow = this.attachShadow({ mode: 'open' });
+
+                const wrapper = document.createElement('div');
+                wrapper.setAttribute('class', 'wrapper');
+
+                const style = document.createElement('style');
+                style.textContent = `
+                    .wrapper {
+                        padding: 16px;
+                        background-color: #fff;
+                        border-radius: 8px;
+                    }
+                    h2 {
+                        margin: 0 0 10px;
+                        font-size: 1.5em;
+                    }
+                    p {
+                        margin: 0;
+                        font-size: 1em;
+                        color: #333;
+                    }
+                `;
+
+                const title = document.createElement('h2');
+                title.textContent = 'Custom Card Title';
+
+                const content = document.createElement('p');
+                content.textContent = 'This is a custom element using Shadow DOM.';
+
+                shadow.appendChild(style);
+                shadow.appendChild(wrapper);
+                wrapper.appendChild(title);
+                wrapper.appendChild(content);
+            }
+        }
+
+        customElements.define('custom-card', CustomCard);
+    </script>
+</body>
+</html>
