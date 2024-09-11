@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Information</title>
+    <link rel="stylesheet" href="G:\web devlopment\microdata.css">
+</head>
+<body>
+    <header>
+        <h1>Book Information</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="book" itemscope itemtype="http://schema.org/Book">
+            <h2 itemprop="name">The Great Gatsby</h2>
+            <p>Author: <span itemprop="author">F. Scott Fitzgerald</span></p>
+            <p>Publisher: <span itemprop="publisher">Charles Scribner's Sons</span></p>
+            <p>Published Date: <span itemprop="datePublished">1925</span></p>
+            <p>ISBN: <span itemprop="isbn">978-0743273565</span></p>
+            <p itemprop="description">The Great Gatsby is a novel written by American author F. Scott Fitzgerald that follows a cast of characters living in the fictional towns of West Egg and East Egg on prosperous Long Island in the summer of 1922.</p>
+        </section>
+    </main>
+    <aside>
+        <h2>Related Books</h2>
+        <ul>
+            <li><a href="#book1">Book 1</a></li>
+            <li><a href="#book2">Book 2</a></li>
+            <li><a href="#book3">Book 3</a></li>
+        </ul>
+    </aside>
+    <footer>
+        <p>© 2024 Book Information. All rights reserved.</p>
+    </footer>
+</body>
+</html>
